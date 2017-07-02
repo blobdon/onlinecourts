@@ -1,12 +1,17 @@
+// This is a prototype application created to illustrate what an online
+// court experience could be like. The app currently does little more than navigate between
+// mocked pages representing different states in the experience for different users.
+//
+// In order to function as envisioned, we would need to implement many of the
+// vital features, a much more complex data model, persistent storage, asynchronous messaging,
+// a library of default questions, requirements, and timelines targeted at specific
+// types of claims, user authentication, ...
+
 package main
 
 import (
-	"fmt"
 	"html/template"
-	"log"
 	"net/http"
-
-	"github.com/boltdb/bolt"
 )
 
 var dcases, jcases d
@@ -68,8 +73,6 @@ func init() {
 	}
 }
 
-var db *bolt.DB
-
 // data for templates
 type d map[string]interface{}
 
@@ -98,8 +101,6 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 // Handler for html pages
 func pageHandler(w http.ResponseWriter, r *http.Request) {
 	// TODO maintain user authentication/id with token/cookie
-	// page := r.URL.Path
-	// fmt.Println("page", page)
 	t, err := template.ParseFiles("static/homepage.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -118,7 +119,6 @@ func newCaseHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		t.Execute(w, d{})
 	} else if r.Method == http.MethodPost {
-		// create/save new case
 		// TODO create/save case
 		http.Redirect(w, r, "/case/id#", http.StatusOK)
 	} else {
@@ -133,7 +133,6 @@ func caseHandler(w http.ResponseWriter, r *http.Request) {
 	if len(id) == 0 {
 		// TODO: get all cases from db with this user ID as a party
 		data := d{
-			// "jcases": jcases,
 			"dcases": dcases,
 		}
 		t, err := template.ParseFiles("static/caseList.html")
@@ -162,14 +161,6 @@ func evidenceHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	db, err := bolt.Open("dummy.db", 0600, nil)
-	if err != nil {
-		// fmt.Println(err)
-		log.Fatal(err)
-	} else {
-		fmt.Println("Connected to db")
-	}
-	defer db.Close()
 
 	http.HandleFunc("/", pageHandler)
 	http.HandleFunc("/user/", mainHandler)
