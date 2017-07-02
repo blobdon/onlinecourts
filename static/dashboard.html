@@ -133,7 +133,7 @@
                 </div>
             </nav>
             
-            
+            {{ if eq .usertype "party" }}
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -306,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-           
+           {{ else if eq .usertype "judge" }}
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -357,32 +357,32 @@
                                                     <td>30 Jun 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
+                                                    <td>452345</td>
                                                     <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
+                                                    <td>Cyril Figgis</td>
+                                                    <td>Awaiting Defendent Response</td>
+                                                    <td>7 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
+                                                    <td>897980</td>
                                                     <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
+                                                    <td>Saul Goodman</td>
+                                                    <td>Pending Claimant Response</td>
+                                                    <td>8 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>4</td>
+                                                    <td>345985</td>
                                                     <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
+                                                    <td>Sterling Archer</td>
+                                                    <td>Pending Claimant Response</td>
+                                                    <td>8 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>5</td>
+                                                    <td>767806</td>
                                                     <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
+                                                    <td>Michael Bluth</td>
+                                                    <td>Awaiting your Decision</td>
+                                                    <td>9 Jul 2017</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -399,6 +399,7 @@
                     </div>
                 </div>
             </div>
+            {{ end }}
             <footer class="footer">
                 <div class="container-fluid">
                     <p class="copyright pull-right">
