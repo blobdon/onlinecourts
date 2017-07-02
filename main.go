@@ -98,9 +98,9 @@ func mainHandler(w http.ResponseWriter, r *http.Request) {
 // Handler for html pages
 func pageHandler(w http.ResponseWriter, r *http.Request) {
 	// TODO maintain user authentication/id with token/cookie
-	page := r.URL.Path
-	fmt.Println("page", page)
-	t, err := template.ParseFiles("static/" + page)
+	// page := r.URL.Path
+	// fmt.Println("page", page)
+	t, err := template.ParseFiles("static/homepage.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
