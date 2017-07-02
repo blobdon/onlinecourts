@@ -3,65 +3,13 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
+
+	"github.com/boltdb/bolt"
 )
 
-type Case struct {
-	ID             string
-	ClaimIDs       map[string]string
-	AdjudicatorIDs map[string]string
-	Status         string
-	CreatedAt      string
-}
-
-type Claim struct {
-	ID           string
-	Type         string
-	ClaimantIDs  map[string]string
-	DefendantIDs map[string]string
-	WitnessIDs   map[string]string
-	EvidenceIDs  map[string]string
-	StdDetails   map[string]string
-	SupDetails   map[string]string
-	Status       string
-	Disposition  string
-	CreatedAt    string
-}
-
-type Person struct {
-	ID         string
-	Title      string
-	FirstNames string
-	Surname    string
-	DOB        string
-	Address    string
-	Postcode   string
-	Email      string
-	Phone      string
-}
-
-type User struct {
-	Person
-	username string
-	passhash string
-}
-
-type Evidence struct {
-	ID       string
-	format   string
-	location string // url of stored file
-}
-
-type Detail struct {
-	ID         string
-	QuestionID string
-	Response   string
-}
-
-type Question struct {
-	ID   string
-	Text string
-}
+var db *bolt.DB
 
 // data for templates
 type d map[string]interface{}
@@ -69,7 +17,7 @@ type d map[string]interface{}
 // Handler for home page
 // /user/:id, i.e. /user/ABC1234567
 func mainHandler(w http.ResponseWriter, r *http.Request) {
-	// id :=
+	// id := r.URL.Path[len("/user/"):]
 	t, err := template.ParseFiles("static/dashboard.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -120,7 +68,7 @@ func caseHandler(w http.ResponseWriter, r *http.Request) {
 		// show details for identified case
 		// get id'd case from storage
 		// TODO, change this template to case template when completed
-		t, err := template.ParseFiles("static/newclaim.html")
+		t, err := template.ParseFiles("static/case.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
@@ -138,6 +86,15 @@ func evidenceHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	db, err := bolt.Open("dummy.db", 0600, nil)
+	if err != nil {
+		// fmt.Println(err)
+		log.Fatal(err)
+	} else {
+		fmt.Println("Connected to db")
+	}
+	defer db.Close()
+
 	http.HandleFunc("/", pageHandler)
 	http.HandleFunc("/user/", mainHandler)
 	http.HandleFunc("/case/new", newCaseHandler)
