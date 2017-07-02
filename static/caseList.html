@@ -70,12 +70,6 @@
                         <p>Evidence</p>
                     </a>
                 </li>
-                <li>
-                    <a href="case.html">
-                        <i class="pe-7s-folder"></i>
-                        <p>Case</p>
-                    </a>
-                </li>
             </ul>
     	</div>
     </div>
@@ -169,20 +163,29 @@
                                         <th>Due Date</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>HQ17XO1372</td>
+                                        {{ range $key, $v := .dcases}}
+                                                <tr>
+                                                    <td><a href="/case/{{ $v.id }}">{{ $v.id }}</a></td>
+                                                    <td>{{ $v.c }}</td>
+                                                    <td>{{ $v.d }}</td>
+                                                    <td>{{ $v.s }}</td>
+                                                    <td>{{ $v.dead }}</td>
+                                                </tr>
+                                        {{ end }}
+                                        <!--<tr>
+                                            <td><a href="/case/HQ17XO1372">HQ17XO1372</a></td>
                                             <td>Mrs Connie Wilkinson</td>
                                             <td>Diamond Care Homes Ltd</td>
                                             <td>Awaiting Review</td>
                                             <td>30 Jun 2017</td>
                                         </tr>
                                         <tr>
-                                            <td>FM16P00127</td>
+                                            <td><a href="/case/FM16P00127">FM16P00127</a></td>
                                             <td>Mrs Connie Wilkinson</td>
                                             <td>Mr Fred Bloggs</td>
                                             <td>Closed</td>
                                             <td>24 Apr 2015</td>
-                                        </tr>
+                                        </tr>-->
                                         
                                       
                                     </tbody>
@@ -215,26 +218,26 @@
 </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+	<script src="/assets/js/bootstrap-checkbox-radio-switch.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	<script src="/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="assets/js/light-bootstrap-dashboard.js"></script>
+	<script src="/assets/js/light-bootstrap-dashboard.js"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<script src="/assets/js/demo.js"></script>
 
 
 </html>

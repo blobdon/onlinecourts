@@ -62,12 +62,6 @@
                             <p>Evidence</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="case.html">
-                            <i class="pe-7s-folder"></i>
-                            <p>Case</p>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -349,7 +343,16 @@
                                                 <th>Due Date</th>
                                             </thead>
                                             <tbody>
+                                                {{ range $key, $v := .jcases}}
                                                 <tr>
+                                                    <td><a href="/case/{{ $v.id }}">{{ $v.id }}</a></td>
+                                                    <td>{{ $v.c }}</td>
+                                                    <td>{{ $v.d }}</td>
+                                                    <td>{{ $v.s }}</td>
+                                                    <td>{{ $v.dead }}</td>
+                                                </tr>
+                                                {{ end }}
+                                                <!--<tr>
                                                     <td>123456</td>
                                                     <td>Dakota Rice</td>
                                                     <td>Mason Porter</td>
@@ -383,7 +386,7 @@
                                                     <td>Michael Bluth</td>
                                                     <td>Awaiting your Decision</td>
                                                     <td>9 Jul 2017</td>
-                                                </tr>
+                                                </tr>-->
                                             </tbody>
                                         </table>
                                     </div>
