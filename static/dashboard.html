@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>HMCS Online</title>
+    <title>HMCTS Online</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Bootstrap core CSS     -->
@@ -34,7 +34,7 @@
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="/" class="simple-text">
-                HMCS Online
+                HMCTS Online
             </a>
                 </div>
                 <ul class="nav">
@@ -62,12 +62,15 @@
                             <p>Evidence</p>
                         </a>
                     </li>
+<<<<<<< HEAD
                     <li>
                         <a href="/case.html">
                             <i class="pe-7s-folder"></i>
                             <p>Case</p>
                         </a>
                     </li>
+=======
+>>>>>>> 0f02675de378cea32d89024234aff94133122975
                 </ul>
             </div>
         </div>
@@ -112,18 +115,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <p>
-                                        Dropdown
+                                        Demo Users
                                         <b class="caret"></b>
                                     </p>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="/user/1">Judge</a></li>
+                                    <li><a href="/user/2">Claimant</a></li>
+                                    <li><a href="/user/3">Defendant</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -137,7 +136,7 @@
                 </div>
             </nav>
             
-            
+            {{ if eq .usertype "party" }}
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -310,7 +309,7 @@
                         </div>
                     </div>
                 </div>
-           
+           {{ else if eq .usertype "judge" }}
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -353,7 +352,16 @@
                                                 <th>Due Date</th>
                                             </thead>
                                             <tbody>
+                                                {{ range $key, $v := .jcases}}
                                                 <tr>
+                                                    <td><a href="/case/{{ $v.id }}">{{ $v.id }}</a></td>
+                                                    <td>{{ $v.c }}</td>
+                                                    <td>{{ $v.d }}</td>
+                                                    <td>{{ $v.s }}</td>
+                                                    <td>{{ $v.dead }}</td>
+                                                </tr>
+                                                {{ end }}
+                                                <!--<tr>
                                                     <td>123456</td>
                                                     <td>Dakota Rice</td>
                                                     <td>Mason Porter</td>
@@ -361,33 +369,33 @@
                                                     <td>30 Jun 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>2</td>
+                                                    <td>452345</td>
                                                     <td>Minerva Hooper</td>
-                                                    <td>$23,789</td>
-                                                    <td>Curaçao</td>
-                                                    <td>Sinaai-Waas</td>
+                                                    <td>Cyril Figgis</td>
+                                                    <td>Awaiting Defendent Response</td>
+                                                    <td>7 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>3</td>
+                                                    <td>897980</td>
                                                     <td>Sage Rodriguez</td>
-                                                    <td>$56,142</td>
-                                                    <td>Netherlands</td>
-                                                    <td>Baileux</td>
+                                                    <td>Saul Goodman</td>
+                                                    <td>Pending Claimant Response</td>
+                                                    <td>8 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>4</td>
+                                                    <td>345985</td>
                                                     <td>Philip Chaney</td>
-                                                    <td>$38,735</td>
-                                                    <td>Korea, South</td>
-                                                    <td>Overland Park</td>
+                                                    <td>Sterling Archer</td>
+                                                    <td>Pending Claimant Response</td>
+                                                    <td>8 Jul 2017</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>5</td>
+                                                    <td>767806</td>
                                                     <td>Doris Greene</td>
-                                                    <td>$63,542</td>
-                                                    <td>Malawi</td>
-                                                    <td>Feldkirchen in Kärnten</td>
-                                                </tr>
+                                                    <td>Michael Bluth</td>
+                                                    <td>Awaiting your Decision</td>
+                                                    <td>9 Jul 2017</td>
+                                                </tr>-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -403,6 +411,7 @@
                     </div>
                 </div>
             </div>
+            {{ end }}
             <footer class="footer">
                 <div class="container-fluid">
                     <p class="copyright pull-right">
@@ -438,7 +447,7 @@ $(document).ready(function() {
 
     $.notify({
         icon: 'pe-7s-hammer',
-        message: "Welcome to <b>HMCS Online</b> - your online dispute resolver."
+        message: "Welcome to <b>HMCTS Online</b> - your online dispute resolver."
 
     }, {
         type: 'info',
